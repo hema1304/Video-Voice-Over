@@ -12,7 +12,7 @@ import imageio
 from pytube import YouTube
 import requests
 app = Flask(__name__)
-app.secret_key = "satya"
+# app.secret_key = "satya"
 app.permanent_session_lifetime = timedelta(minutes=5)
 app.config['DEBUG'] = False
 app.config['TESTING'] = False
@@ -116,7 +116,7 @@ def load():
                         print(f"Error: {e}")
                         flash("Paste valid link or upload video")
                         return redirect(url_for("home"))
-                else:    #google web
+                else:    #google webs
                     try:
                         # Send a GET request to the URL
                         response = requests.get(lin)
@@ -216,4 +216,4 @@ def get_last_command():
         return jsonify({"last_command": a})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host="0.0.0.0",port=5000)
