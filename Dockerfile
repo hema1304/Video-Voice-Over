@@ -11,7 +11,9 @@ WORKDIR /app
 COPY . /app
 
 # Install Python dependencies from the requirements file
-RUN pip install --no-cache-dir -r requirements_linux.txt
+RUN pip install --no-cache-dir --ignore-installed -r requirements_linux.txt
+
+
 
 # Expose port 80 for Flask
 EXPOSE 80
