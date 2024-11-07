@@ -1,31 +1,24 @@
-# Use Python as the base image
-FROM python:3.9-slim
+# Use a lightweight Python image as the base
+FROM python:3.9-alpine
 
-# Install system dependencies for video/audio processing and other necessary packages
-RUN apt-get update && \
-    apt-get install -y ffmpeg git libsndfile1 libpulse0 && \
-    rm -rf /var/lib/apt/lists/*
+# Install dependencies for audio processing and other required libraries
+RUN apk add --no-cache ffmpeg libsndfile libpulse
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Clone the repository into the container
-RUN git clone https://github.com/hema1304/Video-Voice-Over.git /app
-
-# Navigate to the cloned directory (if needed)
-WORKDIR /app
+# Copy local application files to the container
+COPY . /app
 
 # Install Python dependencies from the requirements file
 RUN pip install --no-cache-dir -r requirements_linux.txt
 
-# Expose port 80 for Flask to listen on
+# Expose port 80 for Flask
 EXPOSE 80
 
-# Set environment variable for Flask
+# Set environment variables for Flask
 ENV FLASK_APP=app.py
-
-# Set Flask to run in production mode
 ENV FLASK_ENV=production
 
-# Run the Flask application on host 0.0.0.0 and port 5000
+# Run the Flask application on host 0.0.0.0 and port 80
 CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
