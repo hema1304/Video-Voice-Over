@@ -16,7 +16,7 @@ RUN git clone https://github.com/hema1304/Video-Voice-Over.git /app
 WORKDIR /app
 
 # Install Python dependencies from the requirements file
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements_linux.txt
 
 # Expose port 80 for Flask to listen on
 EXPOSE 80
