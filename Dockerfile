@@ -1,5 +1,5 @@
 # Use a lightweight Python image as the base
-FROM python:3.9-alpine
+FROM python:3.10-alpine
 
 # Install dependencies for audio processing and other required libraries
 RUN apk add --no-cache ffmpeg libsndfile libpulse
