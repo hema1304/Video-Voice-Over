@@ -5,7 +5,7 @@ FROM python:3.10
 WORKDIR /app
 
 # Copy the requirements file to the working directory
-COPY requirements_linux.txt .
+COPY requirements1.txt .
 
 # Update and install necessary system dependencies
 RUN apt-get update && apt-get install -y \
@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
-RUN pip install --no-cache-dir --ignore-installed -r requirements_linux.txt
+RUN pip install --no-cache-dir --ignore-installed -r requirement1.txt
 
 # Copy the rest of the application files
 COPY . .
