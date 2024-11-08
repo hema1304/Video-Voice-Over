@@ -1,6 +1,0 @@
-Flask
-flask-mail
-speechrecognition
-imageio
-requests
-pytube
