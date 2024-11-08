@@ -1,26 +1,26 @@
-# Use a lightweight Python image as the base
-FROM python:3.10-alpine
+# Use an official Python 3.10 image
+FROM python:3.10-slim
 
-# Install dependencies for audio processing and other required libraries
-RUN apk add --no-cache ffmpeg libsndfile libpulse
-
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy local application files to the container
+# Copy application files to the container
 COPY . /app
 
-# Install Python dependencies from the requirements file
+# Install dependencies
 RUN pip install --no-cache-dir --ignore-installed -r requirements_linux.txt
 
+# Set environment variables for Flask-Mail
+ENV MAIL_SERVER=smtp.gmail.com \
+    MAIL_PORT=465 \
+    MAIL_USERNAME=videovoiceover2023@gmail.com \
+    MAIL_PASSWORD='qzvq wito zrvo khmk' \
+    MAIL_USE_TLS=False \
+    MAIL_USE_SSL=True
 
-
-# Expose port 80 for Flask
+# Expose port 80
 EXPOSE 80
 
-# Set environment variables for Flask
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=production
+# Run the Flask app
+CMD ["python", "app.py"]
 
-# Run the Flask application on host 0.0.0.0 and port 80
-CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
