@@ -1,5 +1,5 @@
 # Use a lightweight base image
-FROM python:3.10-slim
+FROM python:3.10
 
 # Set the working directory
 WORKDIR /app
