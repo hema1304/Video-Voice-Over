@@ -11,7 +11,7 @@ transformers
 Pillow
 googletrans
 deep-translator
-cv2
+opencv-python
 summa
 playsound
 IPython
