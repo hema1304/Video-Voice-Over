@@ -1,26 +1,37 @@
-# Use an official Python 3.10 image
+# Use a lightweight base image
 FROM python:3.10-slim
 
-# Set working directory
+# Set the working directory
 WORKDIR /app
 
-# Copy application files to the container
-COPY . /app
+# Copy the requirements file to the working directory
+COPY requirements_linux.txt .
 
-# Install dependencies
+# Update and install necessary system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    portaudio19-dev \
+    libasound2-dev \
+    libjack-jackd2-dev \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 RUN pip install --no-cache-dir --ignore-installed -r requirements_linux.txt
 
-# Set environment variables for Flask-Mail
-ENV MAIL_SERVER=smtp.gmail.com \
-    MAIL_PORT=465 \
-    MAIL_USERNAME=videovoiceover2023@gmail.com \
-    MAIL_PASSWORD='qzvq wito zrvo khmk' \
-    MAIL_USE_TLS=False \
-    MAIL_USE_SSL=True
+# Copy the rest of the application files
+COPY . .
 
-# Expose port 80
+# Set environment variables for Flask-Mail (replace with actual credentials)
+ENV MAIL_SERVER="smtp.gmail.com" \
+    MAIL_PORT=465 \
+    MAIL_USERNAME="videovoiceover2023@gmail.com" \
+    MAIL_PASSWORD="qzvq wito zrvo khmk" \
+    MAIL_USE_TLS="False" \
+    MAIL_USE_SSL="True" 
+
+# Expose the port the app runs on
 EXPOSE 80
 
-# Run the Flask app
+# Start the application
 CMD ["python", "app.py"]
-
