@@ -33,5 +33,8 @@ ENV MAIL_SERVER="smtp.gmail.com" \
 # Expose the port the app runs on
 EXPOSE 80
 
-# Start the application
-CMD ["python", "app.py"]
+# # Start the application
+# CMD ["python", "app.py"]
+
+CMD ["bash", "start.bat"]
+
